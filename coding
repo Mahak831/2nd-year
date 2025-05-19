@@ -1,1 +1,134 @@
-i will upload my code here
+LINKED LIST Notes
+•	Head=the first element
+•	Tail=the last element
+•	One single node have the value and next whose it is pointing to 
+1.	Class Node {
+int val;Node next;}
+•	Linked list code
+
+class LL{
+    private Node head;
+    private int size;
+    private Node tail;
+    public LL(){
+        this.size=0; }
+//INSERT THE ELEMENT IN START
+    public void insertfirst(int val){
+        Node node=new Node(val);
+        node.next=head;
+        head=node;
+        if(tail==null){
+            tail=head; }
+        size+=1;
+    }
+//INSERT THE ELEMENT IN LAST
+    public void inserttail(int val){
+     if(tail==null){
+         insertfirst(val);
+         return;
+     }   
+     Node node=new Node(val);
+     tail.next=node;
+     tail=node;
+     size++; }
+//DISPLAY THE ELEMENTS
+public void display(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.val+"->");
+            temp=temp.next;
+            
+            
+        }
+    }
+//INSERT THE ELEMENT AT GIVEN PLACE
+
+     public void insertatplace(int ind,int val){
+         if(ind==0){
+             insertfirst(val);
+             return;
+         }
+         if(ind==size){
+             inserttail(val);
+             return;
+         }
+         int i=0;
+         Node temp=head;
+         while(i!=ind){
+             temp=temp.next;
+             i++;
+         }
+         Node node=new Node(val);
+                  node.next=temp.next;
+                  temp.next=node;
+size++;
+         
+     }
+//GET THE ELEMENT AT GIVEN PLACE
+
+    public Node get(int index){
+        Node node=head;
+        for(int j=0;j<index;j++){
+            node=node.next;
+        }
+        return node;
+    }
+
+
+    private class Node{
+        private int val;
+        private Node next;
+        public Node(int val){
+            this.val=val;
+        }
+        public Node(int val,Node next){
+            this.val=val;
+            this.next=null;
+            
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+LL mine=new LL();
+
+mine.insertfirst(3);
+mine.insertfirst(4);
+mine.display();    }
+}
+//DELETE THE ELEMENT IN STARTING public int deletefirst(){
+         int value=head.val;
+        head=head.next;
+        if(head==null){
+            tail=null;
+        }
+        size--;
+        return value;
+        
+     }
+    //DELETE THE LAST ELEMENT 
+public int deletelast(){
+         if(size<=1){
+             return deletefirst();
+         }
+         Node secondlast=get(size-2);
+         int value=tail.val;
+         tail=secondlast;
+         tail.next=null;
+         return value;
+     }
+//DELETE THE ELEMENT AT GIVEN PLACE
+
+     public int deleteatindex(int ind){
+         if(ind==1){
+             return deletefirst();
+         }
+         if(ind==size-1){
+             return deletelast();
+         }
+         Node elem=get(ind-1);
+        int val=elem.next.val;
+        elem.next=elem.next.next;
+        return val;
+     }
+
